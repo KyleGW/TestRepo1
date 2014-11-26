@@ -11,58 +11,37 @@
     <link href="Content/SortableGrid.css" rel="stylesheet" />
 
 </head>
-<body ng-controller="indexController" ng-init="initializeController()" style="height:100%;">
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" ng-repeat="menuItem in MenuItems | filter:{Module: 'Main'}">
-                    <li><a href="{{menuItem.Route}}">{{menuItem.Description}}</a></li>
+<body ng-controller="indexController" ng-init="initializeController()">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id ="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-repeat="menuItem in MenuItems | filter:{Module: 'Main'}"><a href="{{menuItem.Route}}">{{menuItem.Description}}</a></li>
                 </ul>
             </div>
         </div>
-    </div>
-   
-    <script language="JavaScript">
-
-        function set95PercentWidth() {            
-            var viewPort = document.getElementById("ViewPort");
-            viewPort.style.width = "95%";
-        }
-
-        function set80PercentWidth() {
-          
-            var viewPort = document.getElementById("ViewPort");
-            viewPort.style.width = "80%";
-        }
-
-    </script>
-
-    <div style="width: 100%; height: 100%; position: absolute; vertical-align: top; margin: 50px 0px 0px 0px">
-   
-        <button class="btn btn-default" style="width: 200px; background-color: antiquewhite; border:none;" ng-show="isCollapsed" onclick="set80PercentWidth()" ng-click="isCollapsed = !isCollapsed">Show Menu>></button>
-        <button class="btn btn-default" style="width: 200px; background-color: antiquewhite; border:none;" ng-show="!isCollapsed" onclick="set95PercentWidth()" ng-click="isCollapsed = !isCollapsed;"><< Hide Menu</button>
-        
-        <div style="width:100%">
-
-            <div collapse="isCollapsed" class="navbar" style="width: 200px; height:100%; vertical-align:top; margin-top:0px; margin-right:20px;background-color: antiquewhite; float:left">
-                <div style="height:1000px">
-                    <table class="table table-hover">
-                        <tr ng-repeat="menuItem in MenuItems | filter:{Module: applicationModule}">
-                            <td><a href="{{menuItem.Route}}">{{menuItem.Description}}</a></td>
-                        </tr>
-                    </table>
-                </div>
-
+    </nav>   
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-sm-3 col-md-2 sidebar" >
+                <ul class="nav nav-sidebar" >
+                    <li ng-repeat="menuItem in MenuItems | filter:{Module: applicationModule}"><a href="{{menuItem.Route}}">{{menuItem.Description}}</a></li>
+                </ul>
             </div>
 
-            <div id="ViewPort" style="vertical-align: top; float: left; width:80%; margin: 0px 40px 40px 40px" ng-view>             
-               <!-- <div style="margin: 0px 40px 40px 40px; background-color:red; float:left; display: inline-block;" ng-view></div>-->
+            <div id="ViewPort" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+                <!-- <div style="margin: 0px 40px 40px 40px; background-color:red; float:left; display: inline-block;" ng-view></div>-->
             </div>
-
         </div>
-     
-
     </div>
 
     <script language="JavaScript">
